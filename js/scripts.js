@@ -1,8 +1,8 @@
 function replaceShortcodes() {
     const shortcodes = {
-        egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/elinks/egf' },
-        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/elinks/egt' },
-        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/elinks/egb' },
+        egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
+        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
+        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
         zgf: { name: 'GDFLIX', regex: /\[zgf id='(.*?)'\]/g, url: 'https://new3.gdflix.cfd/file/' },
         zgt: { name: 'GDTOT', regex: /\[zgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
         zap: { name: 'No-Deside', regex: /\[zap id='(.*?)'\]/g, url: 'https://gdbot.txrlinks.icu/' },
