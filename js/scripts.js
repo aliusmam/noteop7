@@ -1,15 +1,15 @@
 function replaceShortcodes() {
     const shortcodes = {
-        egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
-        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
-        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://txrlinks.icu/elinks/' },
-        zgf: { name: 'GDFLIX', regex: /\[zgf id='(.*?)'\]/g, url: 'https://new3.gdflix.cfd/file/' },
-        zgt: { name: 'GDTOT', regex: /\[zgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
-        zap: { name: 'No-Deside', regex: /\[zap id='(.*?)'\]/g, url: 'https://gdbot.txrlinks.icu/' },
-        zgb: { name: 'GDBOT', regex: /\[zgb id='(.*?)'\]/g, url: 'https://gdmirrorbot.nl/file/' },
-        mgf: { name: 'GDFLIX', regex: /\[mgf id='(.*?)'\]/g, url: 'https://new3.gdflix.cfd/file/' },
-        mgt: { name: 'GDTOT', regex: /\[mgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
-        mgb: { name: 'GDBOT', regex: /\[mgb id='(.*?)'\]/g, url: 'https://gdmirrorbot.nl/file/' },
+        egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/elinks/' },
+        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/elinks/' },
+        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/elinks/' },
+        zgf: { name: 'GDFLIX', regex: /\[zgf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new3.gdflix.cfd/file/' },
+        zgt: { name: 'GDTOT', regex: /\[zgt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new5.gdtot.dad/file/' },
+        zap: { name: 'No-Deside', regex: /\[zap id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdbot.txrlinks.icu/' },
+        zgb: { name: 'GDBOT', regex: /\[zgb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdmirrorbot.nl/file/' },
+        mgf: { name: 'GDFLIX', regex: /\[mgf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new3.gdflix.cfd/file/' },
+        mgt: { name: 'GDTOT', regex: /\[mgt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new5.gdtot.dad/file/' },
+        mgb: { name: 'GDBOT', regex: /\[mgb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdmirrorbot.nl/file/' },
     };
 
     const contentContainers = document.querySelectorAll('.post-body');
