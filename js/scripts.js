@@ -45,7 +45,7 @@ function replaceShortcodes() {
                     console.log(`Original URL: ${fullUrl}, Encoded URL: ${encodedUrl}`);
                     // Create the encoded link with a class for decoding on click
                     return `<a href='data:text/plain;base64,${encodedUrl}' class='encoded-link' target='_blank'>
-                                ${shortcodes[key].name}
+                               <button class='download-button'> ${shortcodes[key].name}</button>
                             </a>`;
                 });
             }
