@@ -67,25 +67,3 @@ function replaceShortcodes() {
 }
 
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
-
-//note
-function inotecodes() {
-    const shortcodes = {
-        inote: { name: 'GDFLIX', regex: /\[inote id='(.*?)'\]/g, url: 'https://ep1.txrlinks.icu/2024/08/inote' }
-    };
-
-    const contentContainers = document.querySelectorAll('.post-body');
-    contentContainers.forEach(contentContainer => {
-        let content = contentContainer.innerHTML;
-        for (const key in shortcodes) {
-            if (shortcodes.hasOwnProperty(key)) {
-                content = content.replace(shortcodes[key].regex, function(match, id) {
-                    return `<p>Write Here IMP Notes</p>`;
-                });
-            }
-        }
-        contentContainer.innerHTML = content;
-    });
-}
-
-document.addEventListener('DOMContentLoaded', inotecodes);
