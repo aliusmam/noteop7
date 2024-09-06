@@ -80,9 +80,7 @@ function inotecodes() {
         for (const key in shortcodes) {
             if (shortcodes.hasOwnProperty(key)) {
                 content = content.replace(shortcodes[key].regex, function(match, id) {
-                    return `<a href='${shortcodes[key].url}${id}' target='_blank'>
-                                <button class='download-button'>${shortcodes[key].name}</button>
-                            </a>`;
+                    return `<p>Write Here IMP Notes</p>`;
                 });
             }
         }
