@@ -67,3 +67,27 @@ function replaceShortcodes() {
 }
 
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
+
+//note
+function inotecodes() {
+    const shortcodes = {
+        inote: { name: 'GDFLIX', regex: /\[inote id='(.*?)'\]/g, url: 'https://ep1.txrlinks.icu/2024/08/inote' }
+    };
+
+    const contentContainers = document.querySelectorAll('.post-body');
+    contentContainers.forEach(contentContainer => {
+        let content = contentContainer.innerHTML;
+        for (const key in shortcodes) {
+            if (shortcodes.hasOwnProperty(key)) {
+                content = content.replace(shortcodes[key].regex, function(match, id) {
+                    return `<a href='${shortcodes[key].url}${id}' target='_blank'>
+                                <button class='download-button'>${shortcodes[key].name}</button>
+                            </a>`;
+                });
+            }
+        }
+        contentContainer.innerHTML = content;
+    });
+}
+
+document.addEventListener('DOMContentLoaded', inotecodes);
