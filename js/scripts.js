@@ -67,3 +67,10 @@ function replaceShortcodes() {
 }
 
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
+
+//Notes
+    document.addEventListener("DOMContentLoaded", function() {
+      const messageDiv = document.getElementById('message');
+      // Use innerHTML to insert HTML tags
+      messageDiv.innerHTML = "<h1>HW</h1>";
+    });
