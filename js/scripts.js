@@ -74,25 +74,3 @@ async function shortenLinksInContent() {
 
 // Run script after DOM content is loaded
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
- 
-//message
-document.addEventListener("DOMContentLoaded", function() {
-      const messageDiv = document.getElementById('message');
-      // Use innerHTML to insert HTML tags
-      messageDiv.innerHTML = "<p>1. Please wait a few seconds while the links are loading.</p>
-    <p>2. We can watch and download videos from GDBot. The available servers are:</p>
-    <ul>
-        <li>Filemoon</li>
-        <li>Streamwish</li>
-        <li>Doodstream</li>
-        <li>Vidguard</li>
-    </ul>
-    <p>3. We can download ZIP files from GDBot. The available servers are:</p>
-    <ul>
-        <li>Vkshre</li>
-        <li>Filepress</li>
-        <li>SendCM</li>
-        <li>Gofile</li>
-        <li>Mixdrop</li>
-    </ul>";
-    });
