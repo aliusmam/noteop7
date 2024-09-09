@@ -45,7 +45,7 @@ async function replaceShortcodes() {
                 const shortcode = shortcodes[key];
                 // Replace shortcodes with full URLs
                 content = content.replace(shortcode.regex, (match, id) => {
-                    return `<a class='shorten-link' data-url='${shortcode.url}${id}' class='css-a-tags' data-name='${shortcode.name}' target='_blank'>
+                    return `<a class='shorten-link' data-url='${shortcode.url}${id}' data-name='${shortcode.name}' target='_blank'>
                                <button class='download-button'>${shortcode.name}</button>
                             </a>`;
                 });
