@@ -1,76 +1,74 @@
-// Base64 encoding and decoding functions
-function encodeBase64(str) {
+// Function to shorten links using the DropLink API
+async function shortenLink(url) {
+    const apiKey = 'd84cf1c232f6aa62029cfa8d08acbac1f965b488'; // Your DropLink API key
+    const apiUrl = `https://droplink.co/api?api=${apiKey}&url=${encodeURIComponent(url)}&format=text`; // Request short link in text format
+
     try {
-        return btoa(unescape(encodeURIComponent(str)));
-    } catch (e) {
-        console.error("Encoding failed:", e);
-        return str; // Fallback to original if encoding fails
+        const response = await fetch(apiUrl);
+        const shortenedUrl = await response.text(); // Get the short link directly as text
+        if (shortenedUrl) {
+            return shortenedUrl; // Return shortened URL
+        } else {
+            console.error('Shortening failed');
+            return url; // Fallback to original URL if shortening fails
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return url; // Fallback to original URL in case of error
     }
 }
 
-function decodeBase64(encodedStr) {
-    try {
-        return decodeURIComponent(escape(atob(encodedStr)));
-    } catch (e) {
-        console.error("Decoding failed:", e);
-        return encodedStr; // Fallback to encoded string if decoding fails
-    }
-}
-
-// Function to replace shortcodes and encode the ID and URL
-function replaceShortcodes() {
+// Function to replace shortcodes with their URLs
+async function replaceShortcodes() {
     const shortcodes = {
-         egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/egf/' },
-        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/egt/' },
-        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://txrlinks.icu/egb/' },
-        zgf: { name: 'GDFLIX', regex: /\[zgf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new3.gdflix.cfd/file/' },
-        zgt: { name: 'GDTOT', regex: /\[zgt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new5.gdtot.dad/file/' },
-        zap: { name: 'No-Deside', regex: /\[zap id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdbot.txrlinks.icu/' },
-        zgb: { name: 'GDBOT', regex: /\[zgb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdmirrorbot.nl/file/' },
-        mgf: { name: 'GDFLIX', regex: /\[mgf id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new3.gdflix.cfd/file/' },
-        mgt: { name: 'GDTOT', regex: /\[mgt id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://new5.gdtot.dad/file/' },
-        mgb: { name: 'GDBOT', regex: /\[mgb id='(.*?)'\]/g, url: 'https://droplink.co/st?api=d84cf1c232f6aa62029cfa8d08acbac1f965b488&url=https://gdmirrorbot.nl/file/' },
+       egf: { name: 'GDFLIX', regex: /\[egf id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/egf' },
+        egt: { name: 'GDTOT', regex: /\[egt id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/egt' },
+        egb: { name: 'GDBOT', regex: /\[egb id='(.*?)'\]/g, url: 'https://www.txrlinks.icu/egb' },
+        zgf: { name: 'GDFLIX', regex: /\[zgf id='(.*?)'\]/g, url: 'https://new3.gdflix.cfd/file/' },
+        zgt: { name: 'GDTOT', regex: /\[zgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
+        zap: { name: 'No-Deside', regex: /\[zap id='(.*?)'\]/g, url: 'https://gdbot.txrlinks.icu/' },
+        zgb: { name: 'GDBOT', regex: /\[zgb id='(.*?)'\]/g, url: 'https://gdmirrorbot.nl/file/' },
+        mgf: { name: 'GDFLIX', regex: /\[mgf id='(.*?)'\]/g, url: 'https://new3.gdflix.cfd/file/' },
+        mgt: { name: 'GDTOT', regex: /\[mgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
+        mgb: { name: 'GDBOT', regex: /\[mgb id='(.*?)'\]/g, url: 'https://gdmirrorbot.nl/file/' },
     };
 
     const contentContainers = document.querySelectorAll('.post-body');
-    contentContainers.forEach(contentContainer => {
+
+    for (const contentContainer of contentContainers) {
         let content = contentContainer.innerHTML;
+
+        // Process each shortcode
         for (const key in shortcodes) {
             if (shortcodes.hasOwnProperty(key)) {
-                content = content.replace(shortcodes[key].regex, function(match, id) {
-                    // Encode the full URL including the ID
-                    const fullUrl = `${shortcodes[key].url}${id}`;
-                    const encodedUrl = encodeBase64(fullUrl);
-                    // Debugging log
-                    console.log(`Original URL: ${fullUrl}, Encoded URL: ${encodedUrl}`);
-                    // Create the encoded link with a class for decoding on click
-                    return `<a href='data:text/plain;base64,${encodedUrl}' class='encoded-link' target='_blank'>
-                               <button class='download-button'> ${shortcodes[key].name}</button>
+                const shortcode = shortcodes[key];
+                // Replace shortcodes with full URLs
+                content = content.replace(shortcode.regex, (match, id) => {
+                    return `<a data-url='${shortcode.url}${id}' data-name='${shortcode.name}' class='shorten-link' target='_blank'>
+                                ${shortcode.name}
                             </a>`;
                 });
             }
         }
-        contentContainer.innerHTML = content;
-    });
 
-    // Add event listener to decode the encoded URL on click
-    document.querySelectorAll('.encoded-link').forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent immediate navigation
-            const encodedUrl = this.href.split(',')[1]; // Extract the Base64 part
-            const decodedUrl = decodeBase64(encodedUrl);
-            // Debugging log
-            console.log(`Encoded URL: ${encodedUrl}, Decoded URL: ${decodedUrl}`);
-            window.open(decodedUrl, '_blank'); // Open the decoded URL in a new tab
-        });
-    });
+        contentContainer.innerHTML = content;
+    }
+
+    // Now shorten the links using DropLink API
+    await shortenLinksInContent();
+}
+
+// Function to shorten links in the content after initial replacement
+async function shortenLinksInContent() {
+    const links = document.querySelectorAll('.shorten-link');
+
+    for (const link of links) {
+        const fullUrl = link.getAttribute('data-url');
+        const name = link.getAttribute('data-name');
+        const shortenedUrl = await shortenLink(fullUrl);
+        link.href = shortenedUrl;
+        link.innerHTML = name;
+    }
 }
 
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
-
-//Notes
-    document.addEventListener("DOMContentLoaded", function() {
-      const messageDiv = document.getElementById('message');
-      // Use innerHTML to insert HTML tags
-      messageDiv.innerHTML = "<h1>HW</h1>";
-    });
