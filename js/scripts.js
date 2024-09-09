@@ -2,7 +2,6 @@
 async function shortenLink(url) {
     const apiKey = 'd84cf1c232f6aa62029cfa8d08acbac1f965b488'; // Your DropLink API key
     const apiUrl = `https://droplink.co/api?api=${apiKey}&url=${encodeURIComponent(url)}&format=text`;
-
     try {
         const response = await fetch(apiUrl);
         if (!response.ok) throw new Error('Network response was not ok');
@@ -18,7 +17,6 @@ async function shortenLink(url) {
         return url;
     }
 }
-
 // Function to replace shortcodes with their URLs
 async function replaceShortcodes() {
     const shortcodes = {
@@ -33,12 +31,9 @@ async function replaceShortcodes() {
         mgt: { name: 'GDTOT', regex: /\[mgt id='(.*?)'\]/g, url: 'https://new5.gdtot.dad/file/' },
         mgb: { name: 'GDBOT', regex: /\[mgb id='(.*?)'\]/g, url: 'https://gdmirrorbot.nl/file/' },
     };
-
     const contentContainers = document.querySelectorAll('.post-body');
-
     for (const contentContainer of contentContainers) {
         let content = contentContainer.innerHTML;
-
         // Process each shortcode
         for (const key in shortcodes) {
             if (shortcodes.hasOwnProperty(key)) {
@@ -51,18 +46,14 @@ async function replaceShortcodes() {
                 });
             }
         }
-
         contentContainer.innerHTML = content;
     }
-
     // Now shorten the links using DropLink API
     await shortenLinksInContent();
 }
-
 // Function to shorten links in the content after initial replacement
 async function shortenLinksInContent() {
     const links = document.querySelectorAll('.shorten-link');
-
     for (const link of links) {
         const fullUrl = link.getAttribute('data-url');
         const name = link.getAttribute('data-name');
@@ -71,29 +62,5 @@ async function shortenLinksInContent() {
         link.innerHTML = `<button class='download-button'>${name}</button>`;
     }
 }
-
 // Run script after DOM content is loaded
 document.addEventListener('DOMContentLoaded', replaceShortcodes);
-
-// Display message
-document.addEventListener("DOMContentLoaded", function() {
-    const messageDiv = document.getElementById('message');
-    // Use backticks for multi-line strings
-    messageDiv.innerHTML = `
-        <p>1. Please wait a few seconds while the links are loading.</p>
-        <p>2. We can watch and download videos from GDBot. The available servers are:</p>
-        <ul>
-            <li>Filemoon</li>
-            <li>Streamwish</li>
-            <li>Doodstream</li>
-            <li>Vidguard</li>
-        </ul>
-        <p>3. We can download ZIP files from GDBot. The available servers are:</p>
-        <ul>
-            <li>Vkshre</li>
-            <li>Filepress</li>
-            <li>SendCM</li>
-            <li>Gofile</li>
-            <li>Mixdrop</li>
-        </ul>`;
-});
