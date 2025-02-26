@@ -3,48 +3,490 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TXR-Links</title>
-	<link rel="icon" href="fav/favicon.ico" type="image/x-icon">
-	<link rel="stylesheet" href="css/home.css">
+    <title>ToonxRole</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <style>
-       
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #1a1a1a; /* Dark background */
+            color: #ffffff; /* White text */
+        }
+
+        /* Header */
+        header {
+            background-color: #000000; /* Black header */
+            padding: 15px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff; /* White text */
+        }
+
+        .navbar-nav .nav-link {
+            font-size: 16px;
+            padding: 10px 15px;
+            color: #ffffff; /* White text */
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+        }
+
+        .post {
+            background-color: #262626; /* Dark gray background for posts */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Ensure all posts have the same height */
+        }
+
+        .post:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .post img {
+            width: 100%; /* Full width */
+            height: 300px; /* Fixed height */
+            object-fit: cover; /* Ensure images fit without cropping */
+            border-radius: 10px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .post img:hover {
+            transform: scale(1.05);
+        }
+
+        .post h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ffffff; /* White text */
+            cursor: pointer;
+            transition: color 0.3s ease;
+            margin-bottom: 10px;
+            flex-grow: 1; /* Allow title to grow and take remaining space */
+        }
+
+        .post h2:hover {
+            color: #007bff; /* Blue on hover */
+        }
+
+        .post .btn {
+            width: 100%;
+            margin-top: 10px; /* Space between buttons */
+            background-color: #007bff; /* Blue button */
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .post .btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .post .btn.download-btn {
+            background-color: #28a745; /* Green for download button */
+        }
+
+        .post .btn.download-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .tags {
+            color: #aaaaaa; /* Light gray for tags */
+            font-size: 0.9em;
+            margin-top: 10px;
+            flex-grow: 1; /* Allow tags to grow and take remaining space */
+        }
+
+        .tags span {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tags span:hover {
+            color: #007bff; /* Blue on hover */
+            text-decoration: underline;
+        }
+
+        /* Sidebar */
+        .sidebar .box {
+            background-color: #262626; /* Dark gray background */
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .sidebar .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #000000; /* Black footer */
+            color: #ffffff; /* White text */
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer .footer-links a {
+            color: #ffffff; /* White text */
+            text-decoration: none;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        footer .footer-links a:hover {
+            text-decoration: underline;
+            transform: translateY(-2px);
+        }
+
+        footer .copyright {
+            font-size: 14px;
+        }
+
+        /* Pagination */
+        .pagination button {
+            margin: 0 5px;
+            border: none;
+            background-color: #007bff; /* Blue button */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+            transform: translateY(-2px);
+        }
+
+        .pagination button.active {
+            background-color: #0056b3; /* Darker blue for active button */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-nav .nav-link {
+                padding: 10px;
+            }
+
+            .post img {
+                height: 200px; /* Adjust height for smaller screens */
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">ToonxRole</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#docs">Docs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#terms">Terms</a>
+                        </li>
+                        <li class="nav-item">
+                            <button class="btn btn-success" id="toggle-download-btn">Enable Download</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-    <div class="container">
-        <!-- Main Heading -->
-        <h1>TXR-Links</h1>
-
-        <!-- Introduction Section -->
-        <div>
-            <p>Welcome to our site! We are dedicated to providing a comprehensive collection of multimedia content, including TV shows, movies, and more. Our mission is to make it easy for users to find and enjoy high-quality entertainment from around the world.</p>
-        </div>
-
-        <!-- Services Section -->
-        <div>
-            <h2 class="section-title">What We Offer</h2>
-            <p>Our site offers a variety of content across different genres and languages. Whether you are looking for the latest episodes of your favorite TV series or want to explore classic movies, we have something for everyone. Here’s a breakdown of our main features:</p>
-            <ul>
-                <li><strong>Multilingual Content:</strong> We provide content in multiple languages, making it accessible to a diverse audience.</li>
-                <li><strong>Easy Navigation:</strong> Our site is designed to be user-friendly, with intuitive navigation to help you find what you’re looking for quickly.</li>
-                <li><strong>High-Quality Streaming:</strong> Enjoy seamless streaming of your favorite shows and movies in various resolutions, including 480p, 720p, and 1080p.</li>
-                <li><strong>Regular Updates:</strong> We update our content library regularly to ensure you have access to the latest releases.</li>
-            </ul>
-        </div>
-
-        <!-- Disclaimer Section -->
-        <div>
-            <h2 class="section-title">Disclaimer</h2>
-            <p>We do not host any files on our servers. All content is hosted on third-party websites. We do not accept responsibility for the content hosted on these external sites. Our role is to provide an index of links that are already available on the internet.</p>
+    <!-- Main Container -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-12">
+                <div class="main-content">
+                    <div class="row g-3 align-items-center mb-4">
+                        <div class="col-md-3">
+                            <select class="form-select" id="tag-filter" onchange="filterByTag()">
+                                <option value="">All Tags</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="search" placeholder="Search..." oninput="searchPosts()">
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-primary w-100" onclick="searchPosts()">Search</button>
+                        </div>
+                    </div>
+                    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4" id="post-container"></div>
+                    <div class="d-flex justify-content-center mt-4" id="pagination"></div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer>
-        &copy; 2024 TXR-Links. All rights reserved.
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="footer-links">
+                        <a href="#home">Home</a>
+                        <a href="#about">About</a>
+                        <a href="#docs">Docs</a>
+                        <a href="#terms">Terms</a>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="copyright">
+                        &copy; 2023 ToonxRole. All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
     </footer>
 
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Posts Data
+        let allPosts = [
+        { title: "Adamas S01", tags: ["Mystery", "Thriller"], img: "https://i.ibb.co/mXpCXHr/Adamas-S01.jpg" },
+    { title: "Alice in Borderland S02", tags: ["Thriller", "Sci-Fi"], img: "https://i.ibb.co/rHj1VL2/Alice-in-Borderland-S02.jpg" },
+    { title: "All I Want for Love Is You S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/LPBYThK/All-I-Want-for-Love-Is-You-S01.jpg" },
+    { title: "Beyond Goodbye S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/fN15Vzj/Beyond-Goodbye-S01.jpg" },
+    { title: "Crash Landing on You S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/zmML8T4/Crash-Landing-on-You-S01.jpg" },
+    { title: "Do You Like Brahms? S01", tags: ["Romance", "Music"], img: "https://i.ibb.co/JR9yRby/Do-You-Like-Brahms-S01.jpg" },
+    { title: "Emergency Couple S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/2v1zhtS/Emergency-Couple-S01.jpg" },
+    { title: "Gaus Electronics S01", tags: ["Comedy", "Workplace"], img: "https://i.ibb.co/nrnG3q4/Gaus-Electronics-S01.jpg" },
+    { title: "Healer S01", tags: ["Action", "Romance"], img: "https://i.ibb.co/zrFpMvh/Healer-S01-E01.jpg" },
+    { title: "Here to Heart S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/DK67GTv/Here-to-Heart-S01.jpg" },
+    { title: "Hospital Ship S01", tags: ["Medical", "Drama"], img: "https://i.ibb.co/fxw0vbp/Hospital-Ship-S01.jpg" },
+    { title: "Itaewon Class S01", tags: ["Drama", "Business"], img: "https://i.ibb.co/WxjGCDn/Itaewon-Class-S01.jpg" },
+    { title: "Jumping Girl S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/W6XxPbF/Jumping-Girl-S01.jpg" },
+    { title: "Kill Me, Heal Me S01", tags: ["Romance", "Psychological"], img: "https://i.ibb.co/q0Wx8PF/Kill-Me-Heal-Me-S01.jpg" },
+    { title: "Love Is Sweet S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/Y77tyzV/Love-Is-Sweet-S01.jpg" },
+    { title: "Love to Hate You S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/2KsYcG2/Love-to-Hate-You-S01.jpg" },
+    { title: "Love With Flaws S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/9cPPXZD/Love-With-Flaws-S01.jpg" },
+    { title: "Lover Stranger S01", tags: ["Romance", "Mystery"], img: "https://i.ibb.co/DM7Mz9c/Lover-Stranger-S01.jpg" },
+    { title: "Mirror: A Tale of Twin Cities S01", tags: ["Fantasy", "Romance"], img: "https://i.ibb.co/Y3yTMXc/Mirror-A-Tale-of-Twin-Cities-S01.jpg" },
+    { title: "Missing 9 S01", tags: ["Mystery", "Thriller"], img: "https://i.ibb.co/qRGh60Y/Missing-9-S01.jpg" },
+    { title: "Move to Heaven S01", tags: ["Drama", "Slice of Life"], img: "https://i.ibb.co/QcH8bXF/Move-to-Heaven-S01.jpg" },
+    { title: "Mr. Plankton S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/3MX6cLC/Mr-Plankton-S01.jpg" },
+    { title: "My Dear Brothers S01", tags: ["Fantasy", "Romance"], img: "https://i.ibb.co/qCP3RZN/My-Dear-Brothers-S01.jpg" },
+    { title: "My Family S01", tags: ["Thriller", "Drama"], img: "https://i.ibb.co/0n9BNNJ/My-Family-S01.jpg" },
+    { title: "My Girlfriend is an Alien S01", tags: ["Fantasy", "Romance"], img: "https://i.ibb.co/qCrKGtp/My-Girlfriend-is-an-Alien-S01.jpg" },
+    { title: "My Horrible Boss S01", tags: ["Comedy", "Drama"], img: "https://i.ibb.co/TcqCPMZ/My-Horrible-Boss-S01.jpg" },
+    { title: "My Little Happiness S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/gj4StpW/My-Little-Happiness-S01.jpg" },
+    { title: "My Love from the Star S01", tags: ["Romance", "Fantasy"], img: "https://i.ibb.co/727XT68/My-Love-from-the-Star-S01.jpg" },
+    { title: "My Name S01", tags: ["Action", "Thriller"], img: "https://i.ibb.co/sP03ZwR/My-Name-S01.jpg" },
+    { title: "My Star Bride S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/fpTN7xw/My-Star-Bride-S01.jpg" },
+    { title: "Oppa Saranghaei S01", tags: ["Romance", "Comedy"], img: "https://i.ibb.co/9g6JJ3y/Oppa-Saranghaei-S01.jpg" },
+    { title: "Queen and I S01", tags: ["Fantasy", "Romance"], img: "https://i.ibb.co/yFTVYJz/Queen-and-I-S01.jpg" },
+    { title: "Radiant Office S01", tags: ["Comedy", "Workplace"], img: "https://i.ibb.co/F5bCV77/Radiant-Office-S01.jpg" },
+    { title: "Rope A Dope S01", tags: ["Action", "Comedy"], img: "https://i.ibb.co/fCtBfFC/Rope-A-Dope-S01.jpg" },
+    { title: "School 2017 S01", tags: ["Teen", "Drama"], img: "https://i.ibb.co/S6RTFhm/School-2017-S01.jpg" },
+    { title: "She and Her Perfect Husband S01", tags: ["Romance", "Drama"], img: "https://i.ibb.co/Fgfc7HH/She-and-Her-Perfect-Husband-S01.jpg" },
+    { title: "Start-Up S01", tags: ["Business", "Drama"], img: "https://i.ibb.co/BPtbbQV/Start-Up-S01.jpg" }
+        ];
+
+        let postsPerPage = 8; // Adjust as needed
+        let currentPage = 1;
+        let currentTag = "";
+        let filteredPosts = [...allPosts];
+        let downloadEnabled = false; // Initially, download button is disabled
+
+        // Populate Tags
+        function populateTags() {
+            let tagSet = new Set();
+            allPosts.forEach(post => post.tags.forEach(tag => tagSet.add(tag)));
+            let tagFilter = document.getElementById("tag-filter");
+            tagFilter.innerHTML = '<option value="">All Tags</option>';
+            tagSet.forEach(tag => {
+                let option = document.createElement("option");
+                option.value = tag;
+                option.textContent = tag;
+                tagFilter.appendChild(option);
+            });
+        }
+
+        // Display Posts
+        function displayPosts() {
+            let container = document.getElementById("post-container");
+            container.innerHTML = "";
+            let start = (currentPage - 1) * postsPerPage;
+            let end = start + postsPerPage;
+            let postsToShow = filteredPosts.slice(start, end);
+
+            postsToShow.forEach(post => {
+                let postDiv = document.createElement("div");
+                postDiv.className = "col";
+                postDiv.innerHTML = `
+                    <div class="post">
+                        <img src="${post.img}" alt="${post.title}" onclick="openPostInNewTab('${post.title}')">
+                        <h2 onclick="openPostInNewTab('${post.title}')">${post.title}</h2>
+                        <button class="btn btn-primary" onclick="openPostInNewTab('${post.title}')">Watch Now</button>
+                        ${downloadEnabled ? `<button class="btn btn-success download-btn" onclick="downloadPost('${post.title}')">Download</button>` : ''}
+                        <p class="tags">Tags: ${post.tags.map(tag => `<span onclick="filterByTag('${tag}')">${tag}</span>`).join(", ")}</p>
+                    </div>
+                `;
+                container.appendChild(postDiv);
+            });
+            displayPagination();
+            updateURL();
+        }
+
+        // Filter by Tag
+        function filterByTag(tag) {
+            currentTag = tag || document.getElementById("tag-filter").value;
+            filteredPosts = currentTag ? allPosts.filter(post => post.tags.includes(currentTag)) : [...allPosts];
+            currentPage = 1;
+            displayPosts();
+        }
+
+        // Search Posts
+        function searchPosts() {
+            let searchTerm = document.getElementById("search").value.toLowerCase();
+            filteredPosts = allPosts.filter(post => post.title.toLowerCase().includes(searchTerm));
+            currentPage = 1;
+            displayPosts();
+        }
+
+        // Open Post in New Tab
+        function openPostInNewTab(title) {
+            let formattedTitle = title.replace(/\s+/g, '-');
+            window.open(`https://maisiteurl.com/${formattedTitle}`, '_blank');
+        }
+
+        // Download Post
+        function downloadPost(title) {
+            let formattedTitle = title.replace(/\s+/g, '-');
+            window.open(`https://maisiteurl.com/d/${formattedTitle}`, '_blank');
+        }
+
+        // Toggle Download Button
+        function toggleDownloadButton() {
+            downloadEnabled = !downloadEnabled;
+            document.getElementById("toggle-download-btn").textContent = downloadEnabled ? "Disable Download" : "Enable Download";
+            displayPosts(); // Refresh posts to show/hide download buttons
+        }
+
+        // Display Pagination
+        function displayPagination() {
+            let pagination = document.getElementById("pagination");
+            pagination.innerHTML = "";
+            let totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+            // Previous Button
+            if (currentPage > 1) {
+                let prevButton = document.createElement("button");
+                prevButton.className = "btn btn-primary mx-1";
+                prevButton.textContent = "Previous";
+                prevButton.onclick = () => goToPage(currentPage - 1);
+                pagination.appendChild(prevButton);
+            }
+
+            // Page Numbers
+            let startPage = Math.max(1, currentPage - 1);
+            let endPage = Math.min(totalPages, currentPage + 1);
+
+            for (let i = startPage; i <= endPage; i++) {
+                let button = document.createElement("button");
+                button.className = currentPage === i ? "btn btn-primary mx-1 active" : "btn btn-primary mx-1";
+                button.textContent = i;
+                button.onclick = () => goToPage(i);
+                pagination.appendChild(button);
+            }
+
+            // Next Button
+            if (currentPage < totalPages) {
+                let nextButton = document.createElement("button");
+                nextButton.className = "btn btn-primary mx-1";
+                nextButton.textContent = "Next";
+                nextButton.onclick = () => goToPage(currentPage + 1);
+                pagination.appendChild(nextButton);
+            }
+
+            // Last Button
+            if (currentPage < totalPages) {
+                let lastButton = document.createElement("button");
+                lastButton.className = "btn btn-primary mx-1";
+                lastButton.textContent = "Last";
+                lastButton.onclick = () => goToPage(totalPages);
+                pagination.appendChild(lastButton);
+            }
+        }
+
+        // Go to Page
+        function goToPage(page) {
+            currentPage = page;
+            displayPosts();
+        }
+
+        // Update URL
+        function updateURL() {
+            let params = new URLSearchParams();
+            if (currentTag) params.set("tag", currentTag);
+            if (currentPage > 1) params.set("page", currentPage); // Only add page if it's not the first page
+            let newURL = `${window.location.pathname}?${params.toString()}`;
+            window.history.replaceState(null, "", newURL);
+        }
+
+        // Get Parameters from URL
+        function getParamsFromURL() {
+            let params = new URLSearchParams(window.location.search);
+            currentTag = params.get("tag") || "";
+            currentPage = params.get("page") ? parseInt(params.get("page")) : 1;
+        }
+
+        // Initialize
+        document.addEventListener("DOMContentLoaded", () => {
+            getParamsFromURL();
+            populateTags();
+            filterByTag(currentTag);
+            displayPosts();
+
+            // Add event listener for toggle download button
+            document.getElementById("toggle-download-btn").addEventListener("click", toggleDownloadButton);
+        });
+    </script>
 </body>
 </html>
