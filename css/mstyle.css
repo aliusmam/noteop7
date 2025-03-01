@@ -1,0 +1,190 @@
+ /* General Styles */
+ body {
+
+    font-family: 'Poppins', sans-serif;
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffffff; /* White text */
+}
+
+/* Header */
+header {
+    background-color: #000000; /* Black header */
+    padding: 15px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff; /* White text */
+}
+
+.navbar-nav .nav-link {
+    font-size: 16px;
+    padding: 10px 15px;
+    color: #ffffff; /* White text */
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    padding: 20px;
+}
+
+.post {
+    background-color: #262626; /* Dark gray background for posts */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure all posts have the same height */
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.post img {
+    width: 100%; /* Full width */
+    height: 100%; /* Fixed height */
+    object-fit: cover; /* Ensure images fit without cropping */
+    border-radius: 10px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.post img:hover {
+    transform: scale(1.05);
+}
+
+.post h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff; /* White text */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-bottom: 10px;
+    flex-grow: 1; /* Allow title to grow and take remaining space */
+}
+
+.post h2:hover {
+    color: #007bff; /* Blue on hover */
+}
+
+.post .btn {
+    width: 100%;
+    margin-top: 10px; /* Space between buttons */
+    background-color: #007bff; /* Blue button */
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.post .btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.post .btn.download-btn {
+    background-color: #28a745; /* Green for download button */
+}
+
+.post .btn.download-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.tags {
+    color: #aaaaaa; /* Light gray for tags */
+    font-size: 0.9em;
+    margin-top: 10px;
+    flex-grow: 1; /* Allow tags to grow and take remaining space */
+}
+
+.tags span {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tags span:hover {
+    color: #007bff; /* Blue on hover */
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar .box {
+    background-color: #262626; /* Dark gray background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar .box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+footer {
+    background-color: #000000; /* Black footer */
+    color: #ffffff; /* White text */
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer .footer-links a {
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+footer .footer-links a:hover {
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
+footer .copyright {
+    font-size: 14px;
+}
+
+/* Pagination */
+.pagination button {
+    margin: 0 5px;
+    border: none;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    transform: translateY(-2px);
+}
+
+.pagination button.active {
+    background-color: #0056b3; /* Darker blue for active button */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar-nav .nav-link {
+        padding: 10px;
+    }
+
+    .post img {
+        height: 100%; /* Adjust height for smaller screens */
+    }
+}
